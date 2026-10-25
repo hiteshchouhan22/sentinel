@@ -3,7 +3,7 @@ package com.taniyanandi.sentinel.stream;
 import com.taniyanandi.sentinel.domain.AnomalyAlert;
 import com.taniyanandi.sentinel.domain.DetectionState;
 import com.taniyanandi.sentinel.domain.TelemetryEvent;
-import com.taniyanandi.sentinel.service.AnomalyDetector;
+import com.taniyanandi.sentinel.service.DetectorStrategy;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -20,11 +20,11 @@ import org.springframework.kafka.support.serializer.JsonSerde;
 
 @Configuration
 public class EventStreamProcessor {
-    private final AnomalyDetector detector;
+    private final DetectorStrategy detector;
     private final String eventsTopic;
     private final String alertsTopic;
 
-    public EventStreamProcessor(AnomalyDetector detector,
+    public EventStreamProcessor(DetectorStrategy detector,
                                 @Value("${sentinel.kafka.events-topic:sentinel.events}") String eventsTopic,
                                 @Value("${sentinel.kafka.alerts-topic:sentinel.alerts}") String alertsTopic) {
         this.detector = detector;
