@@ -47,5 +47,9 @@ sentinel:
     events-topic: sentinel.events
     alerts-topic: sentinel.alerts
   detector:
+    # zscore (default) or ewma — see DetectorStrategy
+    strategy: zscore
     warmup-events: 30
     z-threshold: 3.0
+    # EWMA smoothing factor in (0, 1]; higher follows trend shifts faster
+    ewma-alpha: 0.3
